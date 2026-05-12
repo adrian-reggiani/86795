@@ -1,4 +1,17 @@
+    :root{
+        --negro-profundo: #0A0A0A;
+        --rosa-neon: #FF2EC4;
+        --rosa-brillante: #FF4DFF;
+        --violeta-neon: #9D4EFF;
+        --blanco: #ffff;
+
+    }
+
+
+
+    
     *{
+        font-family: "Pixelify Sans", sans-serif;
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -6,18 +19,35 @@
 
 
     header{
-        background-color: black;
+        background-color: var(--negro-profundo);
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 1rem 2rem;
     }
 
-    .botonera{
+    header .logo img{
+        max-width: 10rem;
+    }
+
+    header .botonera{
         display: flex;
-        justify-content: center;
-        align-items: center;
         gap: 5rem;
+        
+    }
+
+    header .botonera a{
+        color: var(--rosa-neon);
+        text-decoration: none;
+        font-weight: bold;
+        padding: 1.5rem 1rem;
+        border-radius: 0.5rem;
+    }
+
+    header .botonera a:hover{
+        background-color: var(--rosa-brillante);
+        color: var(--blanco) ;
+        
     }
 
     main .bienvenida{
