@@ -1,0 +1,55 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+header{
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.botonera{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+}
+
+main .bienvenida{
+    background-color: blue;
+    min-height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main section{
+    background-color: rgb(199, 196, 196);
+    min-height: 15rem;
+    display: flex;
+    flex-direction: column;
+}
+
+main .tituloCatalogo{
+    margin-top: 0.5rem;
+    background-color: red;
+}
+main .imagenesJuegos{
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+footer {
+    background-color: pink;
+    padding: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5rem;
+}
