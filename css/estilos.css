@@ -51,13 +51,32 @@
     }
 
     main .bienvenida{
-        background-color: blue;
-        min-height: 20rem;
+        height: 90vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-image: url(/img/fondo.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        color: var(--rosa-brillante);
+        font-size: clamp(1rem, 3vw, 2rem);
+        text-align: center;
     }
+
+    main .bienvenida h1{
+        font-weight: bold;
+    }
+
+     main .bienvenida h2{
+        font-weight: 400;
+    }
+
+    main .bienvenida img{
+        width: 10%;
+    }
+
 
     main .catalogo{
         background-color: rgb(199, 196, 196);
@@ -74,6 +93,12 @@
         margin-top: 0.5rem;
         display: flex;
         justify-content: space-evenly;
+        gap: 2rem;
+    }
+
+    main .imagenesCatalogo img{
+        width: 30%;
+        
     }
 
     footer {
