@@ -1,9 +1,11 @@
     :root{
         --negro-profundo: #0A0A0A;
         --rosa-neon: #FF2EC4;
+        --rosa-oscuro: #de06a1;
         --rosa-brillante: #FF4DFF;
         --violeta-neon: #9D4EFF;
         --blanco: #ffff;
+        --azul: #250956;
 
     }
 
@@ -79,15 +81,21 @@
 
 
     main .catalogo{
-        background-color: rgb(199, 196, 196);
+        background-color: var(--negro-profundo);
         min-height: 15rem;
         display: flex;
         flex-direction: column;
     }
 
+    main .catalogo .juegos, .software{
+        margin: 2rem 0;
+    }
+
     main .tituloCatalogo{
-        margin-top: 0.5rem;
-        background-color: red;
+        margin-bottom: 3rem;
+        background-color: var(--negro-profundo);
+        text-align: center;
+        color: var(--rosa-neon);
     }
     main .imagenesCatalogo{
         margin-top: 0.5rem;
@@ -96,10 +104,47 @@
         gap: 2rem;
     }
 
-    main .imagenesCatalogo img{
-        width: 30%;
-        
+    main .imagenesCatalogo .tarjeta{
+        background-color: var(--azul);
+        padding: 1rem;
+        width: 15rem;
+        height: 15rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; 
+        border-radius: 0.5rem;
     }
+
+    main .imagenesCatalogo .tarjeta img{
+        width: 100%;
+        height: 60%;
+        border: 0.2rem solid var(--negro-profundo);
+        border-radius: 1rem;
+    }
+
+    main .imagenesCatalogo .tarjeta p{
+        color: var(--rosa-neon);
+        font-weight: bold;
+        text-align: center;
+    }
+
+    main .imagenesCatalogo .tarjeta .botones{
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+     main .imagenesCatalogo .tarjeta .botones ul{
+        background-color: var(--negro-profundo);
+        padding: 0.5rem;
+        color: var(--rosa-neon);
+        font-weight: bold;
+        border-radius: 0.5rem;
+     }
+
+     main .imagenesCatalogo .tarjeta .botones ul:hover{
+        background-color: var(--violeta-neon);
+        color:var(--rosa-oscuro);
+     }
 
     footer {
         background-color: pink;
