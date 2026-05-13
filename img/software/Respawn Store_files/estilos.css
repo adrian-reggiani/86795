@@ -126,8 +126,6 @@
         color: var(--rosa-neon);
         font-weight: bold;
         text-align: center;
-        
-        
     }
 
     main .imagenesCatalogo .tarjeta .botones{
@@ -148,48 +146,30 @@
         color:var(--rosa-oscuro);
      }
 
-    footer{
+    footer {
         background-color: var(--negro-profundo);
+        padding: 2rem;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        border-top: 0.2rem solid var(--rosa-oscuro);
-    }
-
-    footer .logo img{
-        max-width: 10rem;
-    }
-
-    footer .botonera{
-        display: flex;
+        justify-content: flex-end;
         gap: 5rem;
-        align-items: center;
-        
-    }
-    
-    footer .botonera p{
-        font-size: 2rem;
-        color: var(--rosa-oscuro);
-        text-decoration: underline;
+        border-top: 0.2rem solid var(--rosa-neon);
+        display: flex;
+        justify-content: space-evenly;
     }
 
-    footer .botonera img{
-        width: 4rem;
-        margin: 0.2rem;
+    footer img{
+        width: 10%;
     }
-    footer .redsocial{
-        display: flex;
-    }
-    footer .botonera a{
-        color: var(--rosa-brillante);
+
+    footer a{
+        color: var(--rosa-neon);
         text-decoration: none;
         font-weight: bold;
         padding: 1.5rem 1rem;
         border-radius: 0.5rem;
     }
 
-     footer .botonera a:hover{
-        color: white;
+    footer a:hover{
         background-color: var(--rosa-brillante);
-     }
+        color: var(--blanco) ;
+    }
