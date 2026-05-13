@@ -34,7 +34,8 @@
 
     header .botonera{
         display: flex;
-        gap: 5rem;
+        flex-wrap: wrap;
+        gap: clamp(1rem, 4vw, 2rem);
         
     }
 
@@ -102,6 +103,7 @@
         display: flex;
         justify-content: space-evenly;
         gap: 2rem;
+        flex-wrap: wrap;
     }
 
     main .imagenesCatalogo .tarjeta{
@@ -192,4 +194,37 @@
      footer .botonera a:hover{
         color: white;
         background-color: var(--rosa-brillante);
+     }
+
+     @media (max-width:600px) {
+
+        header{
+            flex-direction: column;
+            
+        }
+
+        header .botonera{
+            justify-content: center;
+        }
+
+        header .botonera a{
+            font-size: 1rem;
+        }
+
+        main .bienvenida{
+            height: 30vh;
+        }
+
+        footer{
+            flex-direction: column;
+        }
+
+        footer .botonera{
+            flex-direction: column;
+            gap: 0;
+        }
+
+        footer .logo{
+            margin-bottom: 2rem;
+        }
      }
