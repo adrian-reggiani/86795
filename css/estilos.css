@@ -196,6 +196,26 @@
         background-color: var(--rosa-brillante);
      }
 
+     .nosotros{
+        background-image: url(../img/fondo.jpg);
+        background-image: url(/img/fondo.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: var(--violeta-neon);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center ;
+     }
+
+     .nosotros p{
+
+        margin: 0 2rem 2rem;
+        font-size: 2rem;
+        color: var(--negro-profundo);
+     }
+
      @media (max-width:600px) {
 
         header{
