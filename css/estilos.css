@@ -123,6 +123,7 @@
         width: 100%;
         border: 0.2rem solid var(--negro-profundo);
         border-radius: 1rem;
+        object-fit: cover;
     }
     
    

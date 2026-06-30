@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "nombre": "No Rest For The Wicked",
+    "precio": 40000,
+    "imagen": "./img/juegos/tarjeta1.webp"
+  },
+  {
+    "id": 2,
+    "nombre": "God Of War Ragnarok",
+    "precio": 80000,
+    "imagen": "./img/juegos/tarjeta2.jpg"
+  },
+
+  {
+   "id": 3,
+    "nombre": "Enshrouded",
+    "precio": 30000,
+    "imagen": "./img/juegos/tarjeta3.jpg" 
+  },
+
+  {
+   "id": 4,
+    "nombre": "Marvel Spider-Man",
+    "precio": 60000,
+    "imagen": "./img/juegos/tarjeta4.jpg" 
+  },
+
+  {
+   "id": 5,
+    "nombre": "RunaScape: DragonWild",
+    "precio": 30000,
+    "imagen": "./img/juegos/tarjeta5.jpg" 
+  },
+
+  {
+   "id": 6,
+    "nombre": "CyberPunk 2077",
+    "precio": 70000,
+    "imagen": "./img/juegos/tarjeta6.jpg" 
+  },
+
+  {
+   "id": 7,
+    "nombre": "Final Fantasys Tactics",
+    "precio": 40000,
+    "imagen": "./img/juegos/tarjeta7.jpg" 
+  },
+
+  {
+   "id": 8,
+    "nombre": "Titan Quest 2",
+    "precio": 20000,
+    "imagen": "./img/juegos/tarjeta8.jpg" 
+  }
+]
