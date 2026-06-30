@@ -149,17 +149,19 @@
         justify-content: space-evenly;
     }
 
-     main .imagenesCatalogo .tarjeta .botones ul{
+     main .imagenesCatalogo .tarjeta .botones button{
         background-color: var(--negro-profundo);
         padding: 0.5rem;
         color: var(--rosa-neon);
         font-weight: bold;
         border-radius: 0.5rem;
+        border: none;
      }
 
-     main .imagenesCatalogo .tarjeta .botones ul:hover{
+     main .imagenesCatalogo .tarjeta .botones button:hover{
         background-color: var(--blanco);
         color:var(--rosa-neon);
+        cursor: pointer;
      }
 
      .panelFlotante{
@@ -197,10 +199,13 @@
 
         background-color: #0A0A0A;
         color: white;
+
+        transition: right 0.3s ;
      }
 
      .sidebar.abierto{
         right: 0;
+        transition: right 0.3s ;
      }
 
      .sidebar .botoneraAside{

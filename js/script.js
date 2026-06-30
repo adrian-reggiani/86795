@@ -1,35 +1,18 @@
 
 const contenedor = document.getElementById("contenedor-juegos");
 const sidebar = document.getElementById("sidebar");
-const btnFavorito = document.getElementById("btnFavoritos")
+const btnFavoritos = document.getElementById("btnFavoritos")
 const btnCarrito = document.getElementById("btnCarrito")
 const btnCerrar = document.getElementById("cerrarAside");
 const tituloAside = document.getElementById("tituloAside")
-
-// Botonera para abrir el aside
-
-btnFavorito.addEventListener("click", () => {
-
-    sidebar.classList.add("abierto")
-    tituloAside.innerHTML = "Favorito"
-
-})
-btnCarrito.addEventListener("click", () => {
-
-    sidebar.classList.add("abierto")
-    tituloAside.innerHTML = "Carrito"
-
-})
-
-btnCerrar.addEventListener("click", () => {
-    sidebar.classList.remove("abierto")
-})
-
+const contenidoAside = document.getElementById("contenidoAside");
+let favoritos = [];
+let juego = [];
 
 // Cargar catalogo a traves de un json de manera dinamica
 async function cargarCatalogo() {
     const respuesta = await fetch("../items.json");
-    const juego = await respuesta.json();
+    juego = await respuesta.json();
 
     juego.forEach(e => {
         contenedor.innerHTML += `
@@ -44,15 +27,91 @@ async function cargarCatalogo() {
                         </div>
 
                         <div class="botones">
-                            <ul>Favoritos</ul>
-                            <ul>Comprar</ul>
+                            <button class="btnFavorito" data-id="${e.id}">
+                                Favoritos
+                            </button>
+
+                            <button class="btnComprar" data-id="${e.id}">
+                                Comprar
+                            </button>
                         </div>
                     </div>
         
         `    
     });
+
+    mostrarContenidoFavorito()
+    botonFavorito()
+
+
     
+    const botonesCompras = document.querySelectorAll(".btnComprar")
+        botonesCompras.forEach(e => {
+            e.addEventListener("click", () => {
+            console.log(e.dataset.id);
+        })
+    })
+}
+
+// Funciones
+
+
+// Botonera para abrir el aside
+function botoneraAside(){
+    btnFavoritos.addEventListener("click", () => {
+    
+        sidebar.classList.add("abierto")
+        tituloAside.innerHTML = "Favorito"
+    
+    })
+    btnCarrito.addEventListener("click", () => {
+    
+        sidebar.classList.add("abierto")
+        tituloAside.innerHTML = "Carrito"
+    
+    })
+    
+    btnCerrar.addEventListener("click", () => {
+        sidebar.classList.remove("abierto")
+    })
 }
 
 
+function botonFavorito(){
+    const botonesFavorito = document.querySelectorAll(".btnFavorito")
+        botonesFavorito.forEach(e => {
+            e.addEventListener("click", () => {
+                const id = Number(e.dataset.id);
+                if (!favoritos.includes(id)){
+                    favoritos.push(id)
+
+                    localStorage.setItem(
+                        "favoritos", JSON.stringify(favoritos)
+                    )
+                }
+                mostrarContenidoFavorito()
+        })
+    })
+}
+
+function obtenerInformacion () {
+    favoritos = JSON.parse(
+        localStorage.getItem("favoritos")
+    ) || [];
+}
+
+   //Mostrar los juegos a favoritos
+function mostrarContenidoFavorito(){
+    contenidoAside.innerHTML = ""
+    const juegosFavoritos = juego.filter(e => favoritos.includes(e.id))
+    juegosFavoritos.forEach(e => {
+        contenidoAside.innerHTML += `
+            <p>${e.nombre}</p>
+        `
+    });
+}
+
+// Main
+botoneraAside()
+obtenerInformacion()
 cargarCatalogo()
