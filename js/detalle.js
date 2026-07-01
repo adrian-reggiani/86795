@@ -10,12 +10,20 @@ const descripcionJuego =
 const precioJuego =
     document.getElementById("precioJuego");
 
+const btnComprarDetalle =
+    document.getElementById("btnComprarDetalle");
+
+const btnFavoritoDetalle =
+    document.getElementById("btnFavoritoDetalle");
+
+let id;
+
 async function cargarDetalle() {
     const parametros = new URLSearchParams(
         window.location.search
     )
     
-    const id = Number(
+    id = Number(
         parametros.get("id")
     )
     
@@ -31,11 +39,82 @@ async function cargarDetalle() {
 
     nombreJuego.textContent = juegoSeleccionado.nombre;
 
-descripcionJuego.textContent = juegoSeleccionado.descripcion;
+    descripcionJuego.textContent = juegoSeleccionado.descripcion;
 
-precioJuego.textContent = `Precio: ${juegoSeleccionado.precio}$`;
+    precioJuego.textContent = `Precio: ${juegoSeleccionado.precio}$`;
 
+    eventoFavoritoDetalle()
+    eventoComprarDetalle()
 }
+
+function eventoFavoritoDetalle(){
+    btnFavoritoDetalle.addEventListener("click", () => {
+
+    let favoritos =
+        JSON.parse(
+            localStorage.getItem("favoritos")
+        ) || [];
+
+    if (!favoritos.includes(id)) {
+        favoritos.push(id);
+        mostrarToast("❤️ Juego agregado a favoritos");
+    } else {
+        favoritos = favoritos.filter(
+            e => e !== id
+        );
+        mostrarToast("💔 Juego eliminado de favoritos");
+    }
+
+    localStorage.setItem(
+        "favoritos",
+        JSON.stringify(favoritos)
+    );
+});
+}
+
+function eventoComprarDetalle(){
+
+    btnComprarDetalle.addEventListener("click", () => {
+
+    let compras =
+        JSON.parse(
+            localStorage.getItem("compras")
+        ) || [];
+
+    const item = compras.find(
+        c => c.id === id
+    );
+
+    if (item) {
+        item.cantidad++;
+        
+    } else {
+        compras.push({
+            id: id,
+            cantidad: 1
+        });
+    }
+
+    mostrarToast("🛒 Juego agregado al carrito");
+
+    localStorage.setItem(
+        "compras",
+        JSON.stringify(compras)
+    );
+});
+}
+
+function mostrarToast(mensaje) {
+    const toast = document.getElementById("toast");
+
+    toast.textContent = mensaje;
+    toast.classList.add("mostrar");
+
+    setTimeout(() => {
+        toast.classList.remove("mostrar");
+    }, 3000);
+}
+
 
 
 cargarDetalle()

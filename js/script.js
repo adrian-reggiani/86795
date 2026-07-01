@@ -79,11 +79,12 @@ function botonFavorito(){
                 const id = Number(e.dataset.id);
                 if (!favoritos.includes(id)){
                     favoritos.push(id)
-
+                    mostrarToast("❤️ Juego agregado a favoritos");
                 }else{
                     favoritos = favoritos.filter(
                         e => e !== id 
                     )
+                    mostrarToast("💔 Juego eliminado de favoritos");
                 }
                 localStorage.setItem(
                     "favoritos", JSON.stringify(favoritos)
@@ -111,6 +112,9 @@ function botonCompras(){
                     cantidad: 1
                     });
                 }
+
+                mostrarToast("🛒 Juego agregado al carrito");
+
                 localStorage.setItem(
                     "compras", JSON.stringify(compras)
                 )
@@ -249,6 +253,17 @@ function eventosCantidadCompra(){
         mostrarContenidoCompras();
     });
     });
+}
+
+function mostrarToast(mensaje) {
+    const toast = document.getElementById("toast");
+
+    toast.textContent = mensaje;
+    toast.classList.add("mostrar");
+
+    setTimeout(() => {
+        toast.classList.remove("mostrar");
+    }, 3000);
 }
 
 
