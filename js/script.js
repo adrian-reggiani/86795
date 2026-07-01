@@ -76,23 +76,46 @@ function botoneraAside(){
     })
 }
 
-
+// Boton para agregar/quitar de favorito
 function botonFavorito(){
     const botonesFavorito = document.querySelectorAll(".btnFavorito")
+
         botonesFavorito.forEach(e => {
             e.addEventListener("click", () => {
                 const id = Number(e.dataset.id);
                 if (!favoritos.includes(id)){
                     favoritos.push(id)
 
-                    localStorage.setItem(
-                        "favoritos", JSON.stringify(favoritos)
+                }else{
+                    favoritos = favoritos.filter(
+                        e => e !== id 
                     )
                 }
+                localStorage.setItem(
+                    "favoritos", JSON.stringify(favoritos)
+                )
                 mostrarContenidoFavorito()
         })
     })
 }
+
+// Función para los botones "-" del aside
+function btnEliminarFavorito() {
+    const btnEliminarFavorito = document.querySelectorAll(".btnEliminarFavorito")
+    btnEliminarFavorito.forEach(e => {
+        e.addEventListener("click", e =>{
+            const id = Number(e.target.dataset.id)
+            favoritos = favoritos.filter(e => e !== id)
+            localStorage.setItem(
+                    "favoritos", JSON.stringify(favoritos)
+                )
+            mostrarContenidoFavorito()
+        })
+    })
+}
+
+    
+
 
 function obtenerInformacion () {
     favoritos = JSON.parse(
@@ -100,15 +123,21 @@ function obtenerInformacion () {
     ) || [];
 }
 
-   //Mostrar los juegos a favoritos
+//Mostrar los juegos a favoritos
 function mostrarContenidoFavorito(){
     contenidoAside.innerHTML = ""
     const juegosFavoritos = juego.filter(e => favoritos.includes(e.id))
     juegosFavoritos.forEach(e => {
         contenidoAside.innerHTML += `
-            <p>${e.nombre}</p>
+            <div class="itemFavorito"> 
+                <p>${e.nombre}</p>
+                <button class="btnEliminarFavorito" data-id="${e.id}">-</button>
+            </div>
+            <br>
+            <hr>
         `
     });
+    btnEliminarFavorito()
 }
 
 // Main
