@@ -5,8 +5,9 @@ const btnFavoritos = document.getElementById("btnFavoritos")
 const btnCarrito = document.getElementById("btnCarrito")
 const btnCerrar = document.getElementById("cerrarAside");
 const tituloAside = document.getElementById("tituloAside")
-const contenidoAsideFavorito = document.getElementById("contenidoAsideFavorito");
-const contenidoAsideCompra = document.getElementById("contenidoAsideCompra")
+const contenidoAside = document.getElementById("contenidoAside");
+
+let vistaActual = "";
 let favoritos = [];
 let compras = [];
 let juego = [];
@@ -42,8 +43,6 @@ async function cargarCatalogo() {
         `    
     });
 
-    mostrarContenidoFavorito()
-    mostrarContenidoCompras()
     botonFavorito()
     botonCompras()
 }
@@ -54,16 +53,16 @@ async function cargarCatalogo() {
 // Botonera para abrir el aside
 function botoneraAside(){
     btnFavoritos.addEventListener("click", () => {
-    
+        vistaActual = "favoritos";
         sidebar.classList.add("abierto")
         tituloAside.innerHTML = "Favorito"
-    
+        mostrarContenidoFavorito();
     })
     btnCarrito.addEventListener("click", () => {
-    
+        vistaActual = "compras";
         sidebar.classList.add("abierto")
         tituloAside.innerHTML = "Carrito"
-    
+        mostrarContenidoCompras();
     })
     
     btnCerrar.addEventListener("click", () => {
@@ -89,7 +88,9 @@ function botonFavorito(){
                 localStorage.setItem(
                     "favoritos", JSON.stringify(favoritos)
                 )
-                mostrarContenidoFavorito()
+                if (vistaActual === "favoritos") {
+                    mostrarContenidoFavorito();
+                }
         })
     })
 }
@@ -100,18 +101,22 @@ function botonCompras(){
         botonesComprar.forEach(e => {
             e.addEventListener("click", () => {
                 const id = Number(e.dataset.id);
-                if (!compras.includes(id)){
-                    compras.push(id)
+                const item = compras.find(c => c.id === id);
 
-                }else{
-                    compras = compras.filter(
-                        e => e !== id 
-                    )
+                if (item) {
+                   item.cantidad++;
+                } else {
+                    compras.push({
+                    id: id,
+                    cantidad: 1
+                    });
                 }
                 localStorage.setItem(
                     "compras", JSON.stringify(compras)
                 )
-                mostrarContenidoCompras()
+                if (vistaActual === "compras") {
+                    mostrarContenidoCompras();
+                }
         })
     })
 }
@@ -145,10 +150,10 @@ function obtenerInformacion () {
 
 //Mostrar los juegos en el aside favoritos
 function mostrarContenidoFavorito(){
-    contenidoAsideFavorito.innerHTML = ""
+    contenidoAside.innerHTML = ""
     const juegosFavoritos = juego.filter(e => favoritos.includes(e.id))
     juegosFavoritos.forEach(e => {
-        contenidoAsideFavorito.innerHTML += `
+        contenidoAside.innerHTML += `
             <div class="itemFavorito"> 
                 <p>${e.nombre}</p>
                 <button class="btnEliminarFavorito" data-id="${e.id}">-</button>
@@ -160,20 +165,85 @@ function mostrarContenidoFavorito(){
     btnEliminarFavorito()
 }
 
+function eventosCantidadCompra(){
+    const btnCompraSuma = document.querySelectorAll(".btnCompraSuma")
+    const btnCompraMenos = document.querySelectorAll(".btnCompraMenos")
+
+    btnCompraSuma.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const id = Number(btn.dataset.id);
+            const item = compras.find(
+                 c => c.id === id
+            );
+
+            item.cantidad++;
+
+            localStorage.setItem(
+               "compras",
+                JSON.stringify(compras)
+            );
+
+            mostrarContenidoCompras();
+        });
+    });
+
+    btnCompraMenos.forEach(btn => {
+    btn.addEventListener("click", () => {
+        const id = Number(btn.dataset.id);
+
+        const item = compras.find(
+            c => c.id === id
+        );
+
+        item.cantidad--;
+
+        if (item.cantidad <= 0) {
+            compras = compras.filter(
+                c => c.id !== id
+            );
+        }
+
+        localStorage.setItem(
+            "compras",
+            JSON.stringify(compras)
+        );
+
+        mostrarContenidoCompras();
+    });
+    });
+}
+
 //Mostrar los juegos en el aside Compras
-function mostrarContenidoCompras(){
-    contenidoAsideCompra.innerHTML = ""
-    const juegosCompras = juego.filter(e => compras.includes(e.id))
+function mostrarContenidoCompras() {
+    contenidoAside.innerHTML = "";
+
+    const juegosCompras = juego.filter(
+        e => compras.some(c => c.id === e.id)
+    );
+
     juegosCompras.forEach(e => {
-        contenidoAsideCompra.innerHTML += `
-            <div class="itemCompra"> 
+
+        const itemCompra = compras.find(
+            c => c.id === e.id
+        );
+
+        contenidoAside.innerHTML += `
+            <div class="itemCompra">
                 <p>${e.nombre}</p>
-                <button class="" data-id="${e.id}">-</button>
+                <p>${e.precio} $</p>
+
+                <div class="botoneraCompras">
+                    <button class="btnCompraSuma" data-id="${e.id}">+</button>
+                    <p>${itemCompra.cantidad}</p>
+                    <button class="btnCompraMenos" data-id="${e.id}">-</button>
+                </div>
             </div>
             <br>
             <hr>
-        `
+        `;
     });
+
+    eventosCantidadCompra();
 }
 
 // Main

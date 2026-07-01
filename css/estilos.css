@@ -232,7 +232,23 @@
 
      }
 
+     .itemCompra{
+        margin:2rem 2rem 0rem; 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+     }
      
+     .botoneraCompras{
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+     }
+
+     .botoneraCompras button{
+        padding: 0.2rem 0.5rem;
+        
+     }
 
     footer{
         background-color: var(--negro-profundo);
