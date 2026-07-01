@@ -349,24 +349,33 @@
         justify-content: space-evenly;
      }
 
-     .detalle .informacion h2{
+     .detalle .informacion h1{
         color: var(--rosa-neon);
      }
      
      
      .detalle .informacion p{
         color: var(--negro-profundo) ;
-        font-weight: 400;
+        font-weight: 700;
      }
 
+     .detalle .informacion .precioJuego{
+        color: var(--rosa-neon);
+     }
+     
      .detalle .botones{
         display: flex;
         justify-content: space-around;
+     }
+     .detalle button{
+        border: none;
         background-color: var(--negro-profundo);
-        padding: 0.5rem;
+        padding: 1.5rem;
+        font-size: 1rem;
         color: var(--rosa-neon);
         font-weight: bold;
         border-radius: 0.5rem;
+        cursor: pointer;
 
      }
 

@@ -21,7 +21,7 @@ async function cargarCatalogo() {
         contenedor.innerHTML += `
         
         <div class="tarjeta">
-                        <a href="./pages/detalle.html">
+                        <a href="./pages/detalle.html?id=${e.id}">
                             <img  src="${e.imagen}">
                         </a>
                         <div class="tarjeta_detalle">
