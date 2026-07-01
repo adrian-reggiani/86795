@@ -17,12 +17,16 @@ async function cargarCatalogo() {
     const respuesta = await fetch("./items.json");
     juego = await respuesta.json();
 
+    
+
     juego.forEach(e => {
+
+        const rutaParaIndex = e.imagen.replace("../", ""); 
         contenedor.innerHTML += `
         
         <div class="tarjeta">
                         <a href="./pages/detalle.html?id=${e.id}">
-                            <img  src="${e.imagen}">
+                            <img src="${rutaParaIndex}">
                         </a>
                         <div class="tarjeta_detalle">
                             <p>${e.nombre}</p>
