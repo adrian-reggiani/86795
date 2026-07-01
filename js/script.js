@@ -5,8 +5,10 @@ const btnFavoritos = document.getElementById("btnFavoritos")
 const btnCarrito = document.getElementById("btnCarrito")
 const btnCerrar = document.getElementById("cerrarAside");
 const tituloAside = document.getElementById("tituloAside")
-const contenidoAside = document.getElementById("contenidoAside");
+const contenidoAsideFavorito = document.getElementById("contenidoAsideFavorito");
+const contenidoAsideCompra = document.getElementById("contenidoAsideCompra")
 let favoritos = [];
+let compras = [];
 let juego = [];
 
 // Cargar catalogo a traves de un json de manera dinamica
@@ -41,16 +43,9 @@ async function cargarCatalogo() {
     });
 
     mostrarContenidoFavorito()
+    mostrarContenidoCompras()
     botonFavorito()
-
-
-    
-    const botonesCompras = document.querySelectorAll(".btnComprar")
-        botonesCompras.forEach(e => {
-            e.addEventListener("click", () => {
-            console.log(e.dataset.id);
-        })
-    })
+    botonCompras()
 }
 
 // Funciones
@@ -76,7 +71,7 @@ function botoneraAside(){
     })
 }
 
-// Boton para agregar/quitar de favorito
+// Boton para agregar/quitar de favorito de la tarjeta
 function botonFavorito(){
     const botonesFavorito = document.querySelectorAll(".btnFavorito")
 
@@ -99,7 +94,29 @@ function botonFavorito(){
     })
 }
 
-// Función para los botones "-" del aside
+function botonCompras(){
+    const botonesComprar = document.querySelectorAll(".btnComprar")
+
+        botonesComprar.forEach(e => {
+            e.addEventListener("click", () => {
+                const id = Number(e.dataset.id);
+                if (!compras.includes(id)){
+                    compras.push(id)
+
+                }else{
+                    compras = compras.filter(
+                        e => e !== id 
+                    )
+                }
+                localStorage.setItem(
+                    "compras", JSON.stringify(compras)
+                )
+                mostrarContenidoCompras()
+        })
+    })
+}
+
+// Función para los botones "-" del aside para quitar elementos
 function btnEliminarFavorito() {
     const btnEliminarFavorito = document.querySelectorAll(".btnEliminarFavorito")
     btnEliminarFavorito.forEach(e => {
@@ -115,20 +132,23 @@ function btnEliminarFavorito() {
 }
 
     
-
-
+// obtiene informacion del localstorage
 function obtenerInformacion () {
     favoritos = JSON.parse(
         localStorage.getItem("favoritos")
     ) || [];
+
+    compras = JSON.parse(
+        localStorage.getItem("compras")
+    ) || [];
 }
 
-//Mostrar los juegos a favoritos
+//Mostrar los juegos en el aside favoritos
 function mostrarContenidoFavorito(){
-    contenidoAside.innerHTML = ""
+    contenidoAsideFavorito.innerHTML = ""
     const juegosFavoritos = juego.filter(e => favoritos.includes(e.id))
     juegosFavoritos.forEach(e => {
-        contenidoAside.innerHTML += `
+        contenidoAsideFavorito.innerHTML += `
             <div class="itemFavorito"> 
                 <p>${e.nombre}</p>
                 <button class="btnEliminarFavorito" data-id="${e.id}">-</button>
@@ -138,6 +158,22 @@ function mostrarContenidoFavorito(){
         `
     });
     btnEliminarFavorito()
+}
+
+//Mostrar los juegos en el aside Compras
+function mostrarContenidoCompras(){
+    contenidoAsideCompra.innerHTML = ""
+    const juegosCompras = juego.filter(e => compras.includes(e.id))
+    juegosCompras.forEach(e => {
+        contenidoAsideCompra.innerHTML += `
+            <div class="itemCompra"> 
+                <p>${e.nombre}</p>
+                <button class="" data-id="${e.id}">-</button>
+            </div>
+            <br>
+            <hr>
+        `
+    });
 }
 
 // Main
