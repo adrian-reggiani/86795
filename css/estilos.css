@@ -429,7 +429,12 @@
         font-weight: bold;
         border-radius: 0.5rem;
         cursor: pointer;
+     }
 
+     .detalle button:hover{
+      background-color: var(--blanco);
+      color:var(--rosa-neon);
+      cursor: pointer;
      }
 
      .detalle .botones a{

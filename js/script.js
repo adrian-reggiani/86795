@@ -22,6 +22,7 @@ async function cargarCatalogo() {
     juego.forEach(e => {
 
         const rutaParaIndex = e.imagen.replace("../", ""); 
+        console.log(rutaParaIndex)
         contenedor.innerHTML += `
         
         <div class="tarjeta">
