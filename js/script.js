@@ -153,8 +153,10 @@ function mostrarContenidoFavorito(){
     contenidoAside.innerHTML = ""
     const juegosFavoritos = juego.filter(e => favoritos.includes(e.id))
     juegosFavoritos.forEach(e => {
+        console.log(e)
         contenidoAside.innerHTML += `
-            <div class="itemFavorito"> 
+            <div class="itemFavorito">
+                <img src="${e.imagen} " alt="${e.nombre}"> 
                 <p>${e.nombre}</p>
                 <button class="btnEliminarFavorito" data-id="${e.id}">-</button>
             </div>
@@ -163,6 +165,42 @@ function mostrarContenidoFavorito(){
         `
     });
     btnEliminarFavorito()
+}
+
+//Mostrar los juegos en el aside Compras
+function mostrarContenidoCompras() {
+    contenidoAside.innerHTML = "";
+
+    const juegosCompras = juego.filter(
+        e => compras.some(c => c.id === e.id)
+    );
+
+    juegosCompras.forEach(e => {
+
+        const itemCompra = compras.find(
+            c => c.id === e.id
+        );
+
+        contenidoAside.innerHTML += `
+            <div class="itemCompra">
+                <img src="${e.imagen} " alt="${e.nombre}">
+                <div>
+                    <p>${e.nombre}</p>
+                    <p>${e.precio} $ X ${itemCompra.cantidad} = ${e.precio * itemCompra.cantidad } </p>                
+                </div>
+
+                <div class="botoneraCompras">
+                    <button class="btnCompraSuma" data-id="${e.id}">+</button>
+                    <p>${itemCompra.cantidad}</p>
+                    <button class="btnCompraMenos" data-id="${e.id}">-</button>
+                </div>
+            </div>
+            <br>
+            <hr>
+        `;
+    });
+
+    eventosCantidadCompra();
 }
 
 function eventosCantidadCompra(){
@@ -213,38 +251,7 @@ function eventosCantidadCompra(){
     });
 }
 
-//Mostrar los juegos en el aside Compras
-function mostrarContenidoCompras() {
-    contenidoAside.innerHTML = "";
 
-    const juegosCompras = juego.filter(
-        e => compras.some(c => c.id === e.id)
-    );
-
-    juegosCompras.forEach(e => {
-
-        const itemCompra = compras.find(
-            c => c.id === e.id
-        );
-
-        contenidoAside.innerHTML += `
-            <div class="itemCompra">
-                <p>${e.nombre}</p>
-                <p>${e.precio} $</p>
-
-                <div class="botoneraCompras">
-                    <button class="btnCompraSuma" data-id="${e.id}">+</button>
-                    <p>${itemCompra.cantidad}</p>
-                    <button class="btnCompraMenos" data-id="${e.id}">-</button>
-                </div>
-            </div>
-            <br>
-            <hr>
-        `;
-    });
-
-    eventosCantidadCompra();
-}
 
 // Main
 botoneraAside()

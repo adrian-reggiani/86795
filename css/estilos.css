@@ -192,9 +192,9 @@
      .sidebar{
         position: fixed;
         top: 0;
-        right: -30rem;
+        right: -70rem;
 
-        width: 30%;
+        width: 50%;
         height: 100vh;
 
         background-color: #0A0A0A;
@@ -238,6 +238,15 @@
         justify-content: space-between;
         align-items: center;
      }
+
+     .itemFavorito img, .itemCompra img {
+        width: 25%;
+        border: 0.2rem solid var(--negro-profundo);
+        border-radius: 1rem;
+        object-fit: cover;
+     }
+
+
      
      .botoneraCompras{
         display: flex;
