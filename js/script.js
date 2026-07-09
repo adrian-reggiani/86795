@@ -1,4 +1,4 @@
-
+// Variables
 const contenedor = document.getElementById("contenedor-juegos");
 const sidebar = document.getElementById("sidebar");
 const btnFavoritos = document.getElementById("btnFavoritos")
@@ -14,19 +14,17 @@ let juego = [];
 
 // Cargar catalogo a traves de un json de manera dinamica
 async function cargarCatalogo() {
-    const respuesta = await fetch("./items.json");
+    const respuesta = await fetch("../items.json");
     juego = await respuesta.json();
 
-    
-
+//  Carga el catalogo de juegos en el Index.html
     juego.forEach(e => {
 
-        const rutaParaIndex = e.imagen.replace("../", ""); 
         contenedor.innerHTML += `
         
         <div class="tarjeta">
                         <a href="./pages/detalle.html?id=${e.id}">
-                            <img src="${rutaParaIndex}">
+                            <img src="${e.imagen}">
                         </a>
                         <div class="tarjeta_detalle">
                             <p>${e.nombre}</p>
@@ -51,8 +49,7 @@ async function cargarCatalogo() {
     botonCompras()
 }
 
-// Funciones
-
+// Funcion Principal
 
 // Botonera para abrir el aside
 function botoneraAside(){

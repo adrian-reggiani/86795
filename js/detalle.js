@@ -1,46 +1,34 @@
-const imgJuego =
-    document.getElementById("imgJuego");
-
-const nombreJuego =
-    document.getElementById("nombreJuego");
-
-const descripcionJuego =
-    document.getElementById("descripcionJuego");
-
-const precioJuego =
-    document.getElementById("precioJuego");
-
-const btnComprarDetalle =
-    document.getElementById("btnComprarDetalle");
-
-const btnFavoritoDetalle =
-    document.getElementById("btnFavoritoDetalle");
+// Funciones
+const imagenJuego = document.getElementById("imgJuego");
+const nombreJuego = document.getElementById("nombreJuego");
+const descripcionJuego = document.getElementById("descripcionJuego");
+const precioJuego = document.getElementById("precioJuego");
+const btnComprarDejuegosimgJuegotalle = document.getElementById("btnComprarDetalle");
+const btnFavoritoDetalle = document.getElementById("btnFavoritoDetalle");
 
 let id;
 
+// Carga del JSON el juego a mostrar en el apartado detalle
 async function cargarDetalle() {
-    const parametros = new URLSearchParams(
-        window.location.search
-    )
+
+    // windows.location.search devuelve la parte que sigue del ? de la url
+    // URLSearchParams tranforma en un objeto la parte que sigue del ?
+    const parametros = new URLSearchParams(window.location.search)
     
-    id = Number(
-        parametros.get("id")
-    )
+    //.get sirve para obtener el id 
+    id = Number(parametros.get("id"))
     
     const respuesta = await fetch("../items.json")
     const juegos = await respuesta.json()
     
+    // Se busca el juego seleccionado
+    const juegoSeleccionado = juegos.find(e => e.id === id)
     
-    const juegoSeleccionado = juegos.find(
-        e => e.id === id
-    )
-    
-    imgJuego.src = juegoSeleccionado.imagen;
-
+    // Se carga el contenido en la pagina detalle
+    imagenJuego.src = `../${juegoSeleccionado.imagen}`;
+    imagenJuego.alt = juegoSeleccionado.nombre;
     nombreJuego.textContent = juegoSeleccionado.nombre;
-
     descripcionJuego.textContent = juegoSeleccionado.descripcion;
-
     precioJuego.textContent = `Precio: ${juegoSeleccionado.precio}$`;
 
     eventoFavoritoDetalle()
