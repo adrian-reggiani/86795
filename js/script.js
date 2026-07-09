@@ -14,7 +14,7 @@ let juego = [];
 
 // Cargar catalogo a traves de un json de manera dinamica
 async function cargarCatalogo() {
-    const respuesta = await fetch("../items.json");
+    const respuesta = await fetch("items.json");
     juego = await respuesta.json();
 
 //  Carga el catalogo de juegos en el Index.html
