@@ -1,14 +1,15 @@
-    :root{
-        --negro-profundo: #0A0A0A;
-        --rosa-neon: #FF2EC4;
-        --rosa-oscuro: #de06a1;
-        --rosa-brillante: #FF4DFF;
-        --violeta-neon: #9D4EFF;
-        --blanco: #ffff;
-        --azul: #250956;
+:root{
+    --negro-profundo: #121212;
+    --gris-oscuro: #1E1E1E;
+    --gris-medio: #2D2D2D;
+    --gris-claro: #CFCFCF;
 
-    }
+    --rosa-neon: #FF4FD8;
+    --rosa-oscuro: #E031B6;
+    --rosa-hover: #FF7AE8;
 
+    --blanco: #F5F5F5;
+}
 
 
     
@@ -40,7 +41,7 @@
     }
 
     header .botonera a{
-        color: var(--rosa-neon);
+        color: var(--blanco);
         text-decoration: none;
         font-weight: bold;
         padding: 1.5rem 1rem;
@@ -48,8 +49,8 @@
     }
 
     header .botonera a:hover{
-        background-color: var(--rosa-brillante);
-        color: var(--blanco) ;
+      background-color: var(--rosa-neon);
+      color: var(--negro-profundo);
         
     }
 
@@ -63,9 +64,10 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        color: var(--rosa-brillante);
+        color: var(--blanco);
         font-size: clamp(1rem, 3vw, 2rem);
         text-align: center;
+        text-shadow: 2px 2px 8px rgba(0,0,0,.8);
     }
 
     main .bienvenida h1{
@@ -97,6 +99,7 @@
         background-color: var(--negro-profundo);
         text-align: center;
         color: var(--rosa-neon);
+        letter-spacing: 2px;
     }
     main .imagenesCatalogo{
         margin-top: 0.5rem;
@@ -107,7 +110,7 @@
     }
 
     main .imagenesCatalogo .tarjeta{
-        background-color: var(--azul);
+        background-color: var(--gris-oscuro);
         padding: 1rem;
         width: 20rem;
         height: 20rem;
@@ -159,9 +162,9 @@
      }
 
      main .imagenesCatalogo .tarjeta .botones button:hover{
-        background-color: var(--blanco);
-        color:var(--rosa-neon);
-        cursor: pointer;
+      background-color: var(--rosa-neon);
+      color: var(--negro-profundo);
+      cursor: pointer;
      }
 
      .panelFlotante{
@@ -187,15 +190,17 @@
         height: 2rem;
      }
 
-     .panelFlotante button{
-        width: 3rem;
-        height: 3rem;
-        border: none;
-        border-radius: 0.1rem;
-     }
-     .panelFlotante button:hover{
-        background-color: #250956;
-     }
+.panelFlotante button{
+      width: 3rem;
+      height: 3rem;
+      border: none;
+      background-color: var(--negro-profundo);
+}
+.panelFlotante button:hover{
+   background-color: var(--blanco);
+   cursor: pointer;
+   border-radius: 2rem;
+}
 
      .panelFavorito{
         display: flex;
@@ -252,7 +257,7 @@
      
      .sidebar .cerrarAside:hover, .btnEliminarFavorito:hover, .btnCompraSuma:hover, .btnCompraMenos:hover{
         cursor: pointer;
-        background-color: var(--azul);
+        background-color: var(--gris-medio);
         border-color: var(--blanco);
         color: var(--blanco);
      }
@@ -273,7 +278,7 @@
      }
 
      .itemFavorito p, .itemCompra p{
-        color: var(--rosa-brillante);
+        color: var(--blanco);
      }
 
      .itemFavorito button{
@@ -346,7 +351,7 @@
         display: flex;
     }
     footer .botonera a{
-        color: var(--rosa-brillante);
+        color: var(--blanco);
         text-decoration: none;
         font-weight: bold;
         padding: 1.5rem 1rem;
@@ -354,8 +359,8 @@
     }
 
      footer .botonera a:hover{
-        color: white;
-        background-color: var(--rosa-brillante);
+      color: var(--negro-profundo);
+      background-color: var(--rosa-neon);
      }
 
      .nosotros{
@@ -371,15 +376,15 @@
      }
 
      .nosotros p{
-
-        margin: 0 2rem 2rem;
-        font-size: 2rem;
-        color: var(--negro-profundo);
+      margin: 0 2rem 2rem;
+      font-size: 2rem;
+      color: var(--blanco);
+      line-height: 1.8;
      }
 
      .detalle{
         display: flex;
-        background-color: var(--azul);
+        background-color: var(--gris-oscuro);
         justify-content: center;
         gap: 2rem;
         padding: 2rem;
@@ -408,12 +413,13 @@
      
      
      .detalle .informacion p{
-        color: var(--negro-profundo) ;
+        color: var(--gris-claro);
+        line-height: 1.7;
         font-weight: 700;
      }
 
      .detalle .informacion .precioJuego{
-        color: var(--rosa-neon);
+        color: var(--blanco);
      }
      
      .detalle .botones{
@@ -431,9 +437,9 @@
         cursor: pointer;
      }
 
-     .detalle button:hover{
-      background-color: var(--blanco);
-      color:var(--rosa-neon);
+   .detalle button:hover{
+      background-color: var(--rosa-neon);
+      color: var(--negro-profundo);
       cursor: pointer;
      }
 
