@@ -13,10 +13,26 @@ let favoritos = [];
 let compras = [];
 let juego = [];
 
+// Airtable
+const AIRTABLE_BASE_ID = "app233GHQGT7YOGSv";
+const AIRTABLE_PAT= "Agregar token";
+const AIRTABLE_TABLE = "Items";
+
+
 // Obtiene los juegos desde el archivo JSON y genera dinámicamente las tarjetas del catálogo.
 async function cargarCatalogo() {
-    const respuesta = await fetch("items.json");
-    juego = await respuesta.json();
+    const respuesta = await fetch(
+    `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE}`,
+    {
+        headers:{
+            Authorization:`Bearer ${AIRTABLE_PAT}`
+        }
+    }
+);
+
+const data = await respuesta.json();
+
+juego = data.records.map(registro => registro.fields);
 
 // Recorre todos los juegos y crea una tarjeta para cada uno.
     juego.forEach(e => {

@@ -9,19 +9,38 @@ const btnFavoritoDetalle = document.getElementById("btnFavoritoDetalle");
 // Variable global para guardar el id del juego seleccionado
 let id;
 
+// Airtable
+const AIRTABLE_BASE_ID = "app233GHQGT7YOGSv";
+const AIRTABLE_PAT = "Agregar token";
+const AIRTABLE_TABLE = "Items";
+
+
 // Carga desde el JSON el juego a mostrar en la página de detalle
 async function cargarDetalle() {
 
-    // window.location.search devuelve la parte de la URL que sigue al signo '?'
-    // URLSearchParams convierte esos parámetros en un objeto fácil de utilizar
-    const parametros = new URLSearchParams(window.location.search);
+// window.location.search devuelve la parte de la URL que sigue al signo '?'
+// URLSearchParams convierte esos parámetros en un objeto fácil de utilizar
+const parametros = new URLSearchParams(window.location.search);
 
-    // Obtiene el id enviado por la URL y lo convierte a número
-    id = Number(parametros.get("id"));
+// Obtiene el id enviado por la URL y lo convierte a número
+id = Number(parametros.get("id"));
 
-    // Obtiene el listado de juegos desde el archivo JSON
-    const respuesta = await fetch("../items.json");
-    const juegos = await respuesta.json();
+console.log(AIRTABLE_BASE_ID);
+console.log(AIRTABLE_TABLE);
+
+const respuesta = await fetch(
+`https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE}`,
+{
+    headers:{
+        Authorization:`Bearer ${AIRTABLE_PAT}`
+    }
+}
+);
+
+const data = await respuesta.json();
+
+
+const juegos = data.records.map(registro => registro.fields);
 
     // Busca el juego cuyo id coincide con el recibido por la URL
     const juegoSeleccionado = juegos.find(e => e.id === id);
