@@ -15,7 +15,7 @@ let juego = [];
 
 // Airtable
 const AIRTABLE_BASE_ID = "app233GHQGT7YOGSv";
-const AIRTABLE_PAT= "Agregar token";
+const AIRTABLE_PAT= "Agregar Token";
 const AIRTABLE_TABLE = "Items";
 
 
@@ -211,12 +211,13 @@ function mostrarContenidoCompras() {
     const juegosCompras = juego.filter(
         e => compras.some(c => c.id === e.id)
     );
+
+    let total = 0;
     
     juegosCompras.forEach(e => {
         
-        const itemCompra = compras.find(
-            c => c.id === e.id
-        );
+        const itemCompra = compras.find(c => c.id === e.id);
+        total += e.precio * itemCompra.cantidad
 
         contenidoAside.innerHTML += `
             <div class="itemCompra">
@@ -237,8 +238,27 @@ function mostrarContenidoCompras() {
         `;
     });
 
+    if (compras.length === 0) {
+
+    contenidoAside.innerHTML = `
+        <p class="carritoVacio">
+            🛒 El carrito está vacío.
+        </p>
+    `;
+
+    return;
+}
+
+    contenidoAside.innerHTML += `
+    <hr>
+    <div class="totalCompra">
+        <h3>Total: $${total}</h3>
+        <button id="btnFinalizarCompra">Finalizar compra</button>
+    </div>
+    `;
 
     eventosCantidadCompra();
+    eventoFinalizarCompra();
 }
 
 // Agrega los eventos para aumentar o disminuir la cantidad de productos del carrito.    
@@ -290,6 +310,30 @@ function eventosCantidadCompra(){
         mostrarContenidoCompras();
     });
     });
+}
+
+// Finaliza la compra y vacía el carrito.
+function eventoFinalizarCompra() {
+
+    const btnFinalizarCompra = document.getElementById("btnFinalizarCompra");
+
+    if (!btnFinalizarCompra) return;
+
+    btnFinalizarCompra.addEventListener("click", () => {
+
+        mostrarToast("✅ Compra realizada con éxito");
+
+        compras = [];
+
+        localStorage.setItem(
+            "compras",
+            JSON.stringify(compras)
+        );
+
+        mostrarContenidoCompras();
+
+    });
+
 }
 
 // Muestra un mensaje temporal en pantalla.

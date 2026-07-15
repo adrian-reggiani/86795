@@ -11,11 +11,11 @@ let id;
 
 // Airtable
 const AIRTABLE_BASE_ID = "app233GHQGT7YOGSv";
-const AIRTABLE_PAT = "Agregar token";
+const AIRTABLE_PAT = "Agregar Token";
 const AIRTABLE_TABLE = "Items";
 
 
-// Carga desde el JSON el juego a mostrar en la página de detalle
+// Obtiene desde Airtable la información del juego seleccionado y la muestra en la página.
 async function cargarDetalle() {
 
 // window.location.search devuelve la parte de la URL que sigue al signo '?'
@@ -25,9 +25,8 @@ const parametros = new URLSearchParams(window.location.search);
 // Obtiene el id enviado por la URL y lo convierte a número
 id = Number(parametros.get("id"));
 
-console.log(AIRTABLE_BASE_ID);
-console.log(AIRTABLE_TABLE);
 
+// Realiza la consulta a la API de Airtable utilizando el token de autenticación.
 const respuesta = await fetch(
 `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE}`,
 {
@@ -37,9 +36,10 @@ const respuesta = await fetch(
 }
 );
 
+// Convierte la respuesta de la API en un objeto JavaScript.
 const data = await respuesta.json();
 
-
+// Obtiene únicamente los campos de cada registro recibido desde Airtable.
 const juegos = data.records.map(registro => registro.fields);
 
     // Busca el juego cuyo id coincide con el recibido por la URL
@@ -102,7 +102,7 @@ function eventoComprarDetalle() {
                 localStorage.getItem("compras")
             ) || [];
 
-        // Busca si el juego ya está agregado al carrito
+        // Verifica si el juego ya existe en el carrito.
         const item = compras.find(
             c => c.id === id
         );
@@ -122,7 +122,7 @@ function eventoComprarDetalle() {
         // Muestra un mensaje de confirmación
         mostrarToast("🛒 Juego agregado al carrito");
 
-        // Guarda el carrito actualizado
+        // Guarda el carrito actualizado en el almacenamiento local.
         localStorage.setItem(
             "compras",
             JSON.stringify(compras)
